@@ -5,7 +5,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class GlovoNextPage {
 
-    @FindBy(xpath = "//div[@id='app']/section/section/div/p")
+    @FindBy(className = "title")
     public SelenideElement confirmationText;
 
     public SelenideElement successfulRegistration() {

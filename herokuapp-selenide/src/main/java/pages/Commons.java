@@ -6,5 +6,6 @@ package pages;
  */
 public class Commons {
 
-    public static final String BASE_URL = "http://the-internet.herokuapp.com";
+    public static final String BASE_URL_HEROKUAPP = "http://the-internet.herokuapp.com";
+    public static final String BASE_URL_GLOVOAPP = "https://cloud.partner.glovoapp.com";
 }

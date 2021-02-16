@@ -1,21 +1,21 @@
 package pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.github.javafaker.PhoneNumber;
 import org.openqa.selenium.support.FindBy;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.page;
 
 public class GlovoRegistrationFormPage {
 
-    @FindBy(xpath = "//p[contains(.,'Страна')]")
+    @FindBy(xpath = "//div/div/p")
     private SelenideElement dropdown_country;
 
-    @FindBy(xpath = "//span[contains(.,'Хорватия')]")
-    private SelenideElement dropdown_country_option1;
+    @FindBy(id = "countrySpan")
+    private ElementsCollection country_elements;
 
-    @FindBy(css = "li:nth-child(1) #countrySpan")
-    private SelenideElement countryOption;
 
     @FindBy(id = "onetrust-accept-btn-handler")
     SelenideElement cookies;
@@ -29,37 +29,34 @@ public class GlovoRegistrationFormPage {
     @FindBy(xpath = "//input[@type='email']")
     private SelenideElement emailInputField;
 
-    @FindBy(xpath = "//span[@class='multiselect__single']")
-    private SelenideElement countryCodeDropdown;
+    @FindBy(css = ".multiselect__select")
+    private SelenideElement countryPhoneCodeDropdown;
 
-    @FindBy(xpath = "//div[@id='prefix_cmp']/div/div[3]/ul/li/span/span")
-    private SelenideElement countryCode;
+    @FindBy(css = ".multiselect__option")
+    private ElementsCollection countryPhoneCodeElements;
 
     @FindBy(xpath = "//input[@id='phone']")
     private SelenideElement phoneInputField;
 
-    @FindBy(xpath = "//form[@id='form-home']/div/div[6]/div/p")
+    @FindBy(xpath = "//div[6]/div/p")
     private SelenideElement typePlaceSelector;
 
-    @FindBy(xpath = "//span[contains(.,'Ресторан')]")
-    private SelenideElement typePlaceOption;
+    @FindBy(css = ".active > li")
+    private ElementsCollection typePlaceElement;
 
-    @FindBy(xpath = "//input[@name='numberBranches']")
+    @FindBy(name = "numberBranches")
     private SelenideElement numberBranches;
 
-    @FindBy(xpath = "//form[@id='form-home']/div/div[8]/div/label/span")
+    @FindBy(css = ".label-icon")
     private SelenideElement check_box;
 
-    @FindBy(xpath = "//button[contains(.,'Продолжить')]")
+    @FindBy(css = ".btn-primary")
     private SelenideElement continueButton;
 
 
-    public void getCountryOptions() {
+    public void fillCountryDropdown(String country) {
         dropdown_country.click();
-    }
-
-    public void selectDropdownCountryOption() {
-        dropdown_country_option1.click();
+        country_elements.findBy(text(country)).click();
     }
 
     public void acceptCookies() {
@@ -78,24 +75,18 @@ public class GlovoRegistrationFormPage {
         emailInputField.setValue(email);
     }
 
-    public void clickCountryCodeDropdown() {
-        countryCodeDropdown.click();
-    }
-
-    public void selectCountryCode() {
-        countryCode.click();
+    public void fillCountryPhoneCodeDropdown(String countryPhoneCode) {
+        countryPhoneCodeDropdown.click();
+        countryPhoneCodeElements.findBy(text(countryPhoneCode)).click();
     }
 
     public void fillPhoneField(PhoneNumber phoneNum) {
         phoneInputField.setValue(String.valueOf(phoneNum));
     }
 
-    public void clickTypeOfPlace() {
+    public void clickTypeOfPlace(String typeOfPlace) {
         typePlaceSelector.click();
-    }
-
-    public void selectOptionOfPlaceType() {
-        typePlaceOption.click();
+        typePlaceElement.findBy(text(typeOfPlace)).click();
     }
 
     public void inputPlaceQuantity(String placeQuantity) {
